@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+    <!--oop functional style-->
+        <script>
+            function Calculator() {
+                var _this = this;
+
+                _this.add = function(a, b) {
+                    return a + b;
+                };
+
+                _this.subtract = function(a, b) {
+                    return a - b;
+                };
+
+                _this.multiply = function(a, b) {
+                    return a * b;
+                };
+
+                _this.divide = function(a, b) {
+                    return a / b;
+                };
+
+                _this.pow = function(a, b) {
+                    return Math.pow(a, b);
+                };
+
+                _this.modulo = function(a, b) {
+                    return a % b;
+                };
+
+                var operators = {
+                    '+': _this.add,
+                    '-': _this.subtract,
+                    '/': _this.divide,
+                    '**': _this.pow,
+                    '%': _this.modulo,
+                    '*' : _this.multiply
+                };
+
+                return function(/*arguments*/) {
+                    var args = [];
+                    var func;
+                    var operator;
+                    var args_length = arguments.length;
+
+                    for (var i = 0; i < args_length; i++) {
+                        args[i] = arguments[i];
+                    }
+
+                    operator = args[0];
+
+                    args.splice(0, 1);
+
+                    if (!operators[operator]) {
+                        func = args[0];
+                        operators[operator] = func;
+                    } else {
+                        func = operators[operator];
+                    }
+
+                    console.log( args.reduce(func) );
+                }
+            }
+
+            var calc = new Calculator();
+
+        </script>
+    </body>
+</html>
